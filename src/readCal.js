@@ -2,6 +2,7 @@ const axios = require("axios");
 const ical = require("node-ical");
 const iCalOffline = require("./icaloffline");
 const { readableDate, readableTime } = require("./timeText");
+const { decodeHTMLEntities } = require("./fn");
 
 async function readCalendar({ icalURL, mode, fwdHour }) {
   if (mode !== "online" && mode !== "offline")
@@ -31,7 +32,7 @@ async function readCalendar({ icalURL, mode, fwdHour }) {
 
   const msgPrepare = prepareMsg(filterHourFwd);
 
-  return generateText(msgPrepare).replace(/<\/?[^>]+>/gim, " ");
+  return generateText(msgPrepare);
 }
 
 function generateText(data) {
@@ -40,7 +41,9 @@ function generateText(data) {
     msgOut += "\n\n" + e.title || "No title";
     msgOut += e.dtRangeTxt ? "\n" + e.dtRangeTxt : "";
     msgOut += e.location ? "\nLocation: " + e.location : "";
-    msgOut += e.description ? "\n" + e.description : "";
+    msgOut += e.description
+      ? "\n" + decodeHTMLEntities(e.description.replace(/<\/?[^>]+>/gim, " "))
+      : "";
   });
 
   return msgOut;
