@@ -31,7 +31,7 @@ async function readCalendar({ icalURL, mode, fwdHour }) {
 
   const msgPrepare = prepareMsg(filterHourFwd);
 
-  return generateText(msgPrepare);
+  return generateText(msgPrepare).replace(/<\/?[^>]+>/gim, " ");
 }
 
 function generateText(data) {
