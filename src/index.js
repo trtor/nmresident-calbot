@@ -3,7 +3,7 @@ const CronJob = require("cron").CronJob;
 const { readCalendar } = require("./readCal");
 const { sendNotify } = require("./lineNotify");
 /*  */
-console.log("Start Cron Timer");
+console.log("Start Cron Timer process");
 /*  */
 const jobDaily = new CronJob(
   process.env.PROCESS_DAILY_INTERVAL_CRON,
@@ -62,5 +62,3 @@ async function runWeekly() {
       },
     });
 }
-
-runWeekly();
