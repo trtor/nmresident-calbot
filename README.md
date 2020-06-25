@@ -3,7 +3,9 @@
 Server time zone must set to GMT +07:00
 
 ## Installation
+
 ### Create .env file in root of project directory
+
 ```
 # MODE "offline", "online"
 MODE=online
@@ -27,4 +29,5 @@ LOOKFORWARD_WEEKLY_MAX_HOUR=168
 # LINE
 LINE_TOKEN=
 ```
+
 more about [crontab](https://crontab.guru/)
