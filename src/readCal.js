@@ -36,9 +36,10 @@ async function readCalendar({ icalURL, mode, fwdHour }) {
 }
 
 function generateText(data) {
-  let msgOut = "\n-- Activity --";
-  data.forEach((e) => {
-    msgOut += "\n\n" + e.title || "No title";
+  let msgOut = "Next Activity:";
+  data.forEach((e, i) => {
+    msgOut += i === 0 ? "\n" : "\n\n";
+    msgOut += e.title || "No title";
     msgOut += e.dtRangeTxt ? "\n" + e.dtRangeTxt : "";
     msgOut += e.location ? "\nLocation: " + e.location : "";
     msgOut += e.description
