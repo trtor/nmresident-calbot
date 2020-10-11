@@ -40,12 +40,20 @@ function generateText(data) {
   let msgOut = "Next Activity";
   data.forEach((e, i) => {
     msgOut += i === 0 ? "\n" : "\n\n";
-    msgOut += e.dtRangeTxt ? e.dtRangeTxt : "";
-    msgOut += e.title || "\n" + "No title";
-    msgOut += e.location ? "\n" + "Location: " + e.location : "";
-    msgOut += e.description
-      ? "\n" + decodeHTMLEntities(e.description.replace(/<\/?[^>]+>/gim, " "))
-      : "";
+
+    // Date
+    e.dtRangeTxt && (msgOut += e.dtRangeTxt);
+
+    // Title
+    msgOut += "\n" + (e.title || "No title");
+
+    // Location
+    e.location && (msgOut += "\n" + "Location: " + e.location);
+
+    // Description
+    e.description &&
+      (msgOut +=
+        "\n" + decodeHTMLEntities(e.description.replace(/<\/?[^>]+>/gim, " ")));
   });
 
   return msgOut;
