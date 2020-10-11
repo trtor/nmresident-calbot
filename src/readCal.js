@@ -39,9 +39,9 @@ function generateText(data) {
   let msgOut = "Next Activity:";
   data.forEach((e, i) => {
     msgOut += i === 0 ? "\n" : "\n\n";
-    msgOut += e.title || "No title";
-    msgOut += e.dtRangeTxt ? "\n" + e.dtRangeTxt : "";
-    msgOut += e.location ? "\nLocation: " + e.location : "";
+    msgOut += e.dtRangeTxt ? e.dtRangeTxt : "";
+    msgOut += e.title || "\n" + "No title";
+    msgOut += e.location ? "\n" + "Location: " + e.location : "";
     msgOut += e.description
       ? "\n" + decodeHTMLEntities(e.description.replace(/<\/?[^>]+>/gim, " "))
       : "";
@@ -55,7 +55,9 @@ function generateText(data) {
  * @param {object[]} data - Array of object containing filtered calendar data
  */
 function prepareMsg(data) {
-  const allDataDate = [...new Set(data.map((e) => new Date(e.start).getDate()))];
+  const allDataDate = [
+    ...new Set(data.map((e) => new Date(e.start).getDate())),
+  ];
 
   if (allDataDate.length === 0) return "";
 
@@ -65,7 +67,8 @@ function prepareMsg(data) {
       const curDate = new Date(d.start).getDate();
       if (curDate !== a) return;
 
-      const sameDateStartEnd = new Date(d.start).getDate() === new Date(d.end).getDate();
+      const sameDateStartEnd =
+        new Date(d.start).getDate() === new Date(d.end).getDate();
 
       let dtText = "";
 
