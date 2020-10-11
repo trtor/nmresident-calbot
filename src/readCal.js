@@ -37,7 +37,7 @@ async function readCalendar({ icalURL, mode, fwdHour }) {
 }
 
 function generateText(data) {
-  let msgOut = "Next Activity:";
+  let msgOut = "Next Activity";
   data.forEach((e, i) => {
     msgOut += i === 0 ? "\n" : "\n\n";
     msgOut += e.dtRangeTxt ? e.dtRangeTxt : "";
