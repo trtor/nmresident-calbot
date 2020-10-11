@@ -1,6 +1,6 @@
 const axios = require("axios");
 const ical = require("node-ical");
-const iCalOffline = require("./icaloffline");
+// const iCalOffline = require("./icaloffline");
 const { readableDate, readableTime } = require("./timeText");
 const { decodeHTMLEntities } = require("./fn");
 
@@ -8,9 +8,10 @@ async function readCalendar({ icalURL, mode, fwdHour }) {
   if (mode !== "online" && mode !== "offline")
     return console.error("Mode can be 'online' or 'offline'");
 
-  let icalStr;
-  if (mode === "online") icalStr = await getiCal({ url: icalURL });
-  else icalStr = iCalOffline;
+  const icalStr = await getiCal({ url: icalURL });
+  // let icalStr;
+  // if (mode === "online") icalStr = await getiCal({ url: icalURL });
+  // else icalStr = iCalOffline;
 
   // console.log("mainProcess", icalStr);
   const parseData = parseICS(icalStr);
